@@ -17,4 +17,4 @@ test <- repchkdl(inpurl = "ftp://speedtest.tele2.net/upload/",
 ````
 
 
-Feedback and criticism welcome!
+### Feedback and criticism welcome!
