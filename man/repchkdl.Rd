@@ -2,7 +2,7 @@
 % Please edit documentation in R/repchkdl.R
 \name{repchkdl}
 \alias{repchkdl}
-\title{Continually Check for and Download Newly Added Files from Given URL Matching Optional Regex.}
+\title{Continually Check for and Download Newly Added Files from Given URL Matching Optional Regex}
 \usage{
 repchkdl(
   inpurl = NA,
@@ -15,19 +15,19 @@ repchkdl(
 )
 }
 \arguments{
-\item{inpurl}{(character) URL that should be scanned.}
+\item{inpurl}{(character) URL that should be scanned}
 
-\item{inpwd}{(character; optional) directory where downloaded files should be saved (default location supplied by getwd()).}
+\item{inpwd}{(character; optional) directory where downloaded files should be saved (default location supplied by getwd())}
 
-\item{inpregex}{(character; optional) regular expression (default NA) to indicate what file additions at the URL should be considered for download.}
+\item{inpregex}{(character; optional) regular expression (default NA) to indicate what file additions at the URL should be considered for download}
 
-\item{autoscan}{(y/n) set to "y" (default) to have repchkdl rescan automatically.}
+\item{autoscan}{(y/n) set to "y" (default) to have repchkdl rescan automatically}
 
-\item{autodl}{(y/n) set to "y" (default) to have repchkdl download new files automatically.}
+\item{autodl}{(y/n) set to "y" (default) to have repchkdl download new files automatically}
 
-\item{inpwait}{(double) time in seconds (default 2 seconds) after which repchkdl should poll the URL again.}
+\item{inpwait}{(double) time in seconds (default 2 seconds) after which repchkdl should poll the URL again}
 
-\item{enabledl}{(y/n) if set to "n" (default "y") repchkdl will SIMULATE downloads (i.e., nothing will be downloaded even if the terminal prints "Downloading file: ").}
+\item{enabledl}{(y/n) if set to "n" (default "y") repchkdl will SIMULATE downloads (i.e., nothing will be downloaded even if the terminal prints "Downloading file: ")}
 }
 \value{
 a vector containing the names of all files that have been downloaded
@@ -43,5 +43,6 @@ forcibly exited if autoscan = "y" is set, as there is no way to break the recurs
 otherwise. This CAN cause the latest set of files to not
 }
 \examples{
-test <- repchkdl(inpurl = "ftp://speedtest.tele2.net/upload/", inpregex = ".txt", autoscan = "n", autodl = "n")
+\dontrun{test <- repchkdl(inpurl = "ftp://speedtest.tele2.net/upload/",
+inpregex = ".txt", autoscan = "n", autodl = "n")}
 }

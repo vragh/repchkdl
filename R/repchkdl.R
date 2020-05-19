@@ -1,4 +1,4 @@
-#' Continually Check for and Download Newly Added Files from Given URL Matching Optional Regex.
+#' Continually Check for and Download Newly Added Files from Given URL Matching Optional Regex
 #'
 #' This function downloads data from the given URL and keeps checking for new
 #' files at the URL thereafter. Should new files become available, the function
@@ -9,18 +9,20 @@
 #' forcibly exited if autoscan = "y" is set, as there is no way to break the recursion
 #' otherwise. This CAN cause the latest set of files to not
 #'
-#' @param inpurl (character) URL that should be scanned.
-#' @param inpwd (character; optional) directory where downloaded files should be saved (default location supplied by getwd()).
-#' @param inpregex (character; optional) regular expression (default NA) to indicate what file additions at the URL should be considered for download.
-#' @param autoscan (y/n) set to "y" (default) to have repchkdl rescan automatically.
-#' @param autodl (y/n) set to "y" (default) to have repchkdl download new files automatically.
-#' @param inpwait (double) time in seconds (default 2 seconds) after which repchkdl should poll the URL again.
-#' @param enabledl (y/n) if set to "n" (default "y") repchkdl will SIMULATE downloads (i.e., nothing will be downloaded even if the terminal prints "Downloading file: ").
+#' @param inpurl (character) URL that should be scanned
+#' @param inpwd (character; optional) directory where downloaded files should be saved (default location supplied by getwd())
+#' @param inpregex (character; optional) regular expression (default NA) to indicate what file additions at the URL should be considered for download
+#' @param autoscan (y/n) set to "y" (default) to have repchkdl rescan automatically
+#' @param autodl (y/n) set to "y" (default) to have repchkdl download new files automatically
+#' @param inpwait (double) time in seconds (default 2 seconds) after which repchkdl should poll the URL again
+#' @param enabledl (y/n) if set to "n" (default "y") repchkdl will SIMULATE downloads (i.e., nothing will be downloaded even if the terminal prints "Downloading file: ")
 #'
 #' @return a vector containing the names of all files that have been downloaded
 #'
 #' @export
-#' @examples test <- repchkdl(inpurl = "ftp://speedtest.tele2.net/upload/", inpregex = ".txt", autoscan = "n", autodl = "n")
+#'
+#' @examples \dontrun{test <- repchkdl(inpurl = "ftp://speedtest.tele2.net/upload/",
+#' inpregex = ".txt", autoscan = "n", autodl = "n")}
 
 repchkdl <- function(inpurl = NA, inpwd = getwd(), inpregex = NA, autoscan = "y", autodl = "y", inpwait = 2, enabledl = "y"){
 
