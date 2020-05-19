@@ -1,0 +1,20 @@
+Package: repchkdl
+Date: 2020-05-18
+Type: Package
+Title: Continually Check for and Download Newly Added Files from Given URL Matching Optional Regex
+Version: 0.1.0
+Author: Venket Raghavan
+Maintainer: Venket Raghavan <venketraghavan@protonmail.com>
+Description: repchkdl consists of a single eponymous function.
+  Given a URL hosting a collection of files, repchkdl will repeatedly
+  check if new files have been added to the URL (since the first time it checks the URL).
+  If new files are available, repchkdl indicates the files and offers to download them.
+  An optional regular expression pattern can be specified to constrain what files repchkdl
+  should consider as valid new additions (based on the file name(s)).
+  repchkdl saves the downloaded files to the default working directory unless an alternative
+  path is specified.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: RCurl, stringr, XML, utils
+RoxygenNote: 7.1.0
