@@ -1,6 +1,6 @@
 Package: repchkdl
 Type: Package
-Title: Continually Check for and Download Newly Added Files from Given URL Matching Optional Regex
+Title: Continually Check for and Download Newly Added Files from a URL
 Version: 0.1.0
 Author: Venket Raghavan
 Maintainer: Venket Raghavan <venketraghavan@protonmail.com>
