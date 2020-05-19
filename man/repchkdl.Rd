@@ -11,7 +11,8 @@ repchkdl(
   autoscan = "y",
   autodl = "y",
   inpwait = 2,
-  enabledl = "y"
+  enabledl = "y",
+  scanlim = NA
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ repchkdl(
 \item{inpwait}{(double) time in seconds (default 2 seconds) after which repchkdl should poll the URL again}
 
 \item{enabledl}{(y/n) if set to "n" (default "y") repchkdl will SIMULATE downloads (i.e., nothing will be downloaded even if the terminal prints "Downloading file: ")}
+
+\item{scanlim}{(integer; optional) sets the number of times repchkdl should run before exiting}
 }
 \value{
 a vector containing the names of all files that have been downloaded
@@ -40,7 +43,7 @@ to indicate what should be considered valid "new" files; e.g, "txt" would
 check and alert the user/download the files if and only if a file matching
 the regex "txt" becomes available at the URL. Note: repchkdl will have to be
 forcibly exited if autoscan = "y" is set, as there is no way to break the recursion
-otherwise. This CAN cause the latest set of files to not
+otherwise. This CAN cause the latest set of files to not be downloaded!
 }
 \examples{
 \dontrun{test <- repchkdl(inpurl = "ftp://speedtest.tele2.net/upload/",

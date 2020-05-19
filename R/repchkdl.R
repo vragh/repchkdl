@@ -7,7 +7,7 @@
 #' check and alert the user/download the files if and only if a file matching
 #' the regex "txt" becomes available at the URL. Note: repchkdl will have to be
 #' forcibly exited if autoscan = "y" is set, as there is no way to break the recursion
-#' otherwise. This CAN cause the latest set of files to not
+#' otherwise. This CAN cause the latest set of files to not be downloaded!
 #'
 #' @param inpurl (character) URL that should be scanned
 #' @param inpwd (character; optional) directory where downloaded files should be saved (default location supplied by getwd())
@@ -16,6 +16,7 @@
 #' @param autodl (y/n) set to "y" (default) to have repchkdl download new files automatically
 #' @param inpwait (double) time in seconds (default 2 seconds) after which repchkdl should poll the URL again
 #' @param enabledl (y/n) if set to "n" (default "y") repchkdl will SIMULATE downloads (i.e., nothing will be downloaded even if the terminal prints "Downloading file: ")
+#' @param scanlim (integer; optional) sets the number of times repchkdl should run before exiting
 #'
 #' @return a vector containing the names of all files that have been downloaded
 #'
@@ -24,7 +25,7 @@
 #' @examples \dontrun{test <- repchkdl(inpurl = "ftp://speedtest.tele2.net/upload/",
 #' inpregex = ".txt", autoscan = "n", autodl = "n")}
 
-repchkdl <- function(inpurl = NA, inpwd = getwd(), inpregex = NA, autoscan = "y", autodl = "y", inpwait = 2, enabledl = "y"){
+repchkdl <- function(inpurl = NA, inpwd = getwd(), inpregex = NA, autoscan = "y", autodl = "y", inpwait = 2, enabledl = "y", scanlim = NA){
 
   #FUNCTION BEGIN ----------------------------------------------------------------
 
@@ -275,6 +276,11 @@ repchkdl <- function(inpurl = NA, inpwd = getwd(), inpregex = NA, autoscan = "y"
 
     #Update prevlinks
     prevlinks <- curlinks
+
+    #If scanlim is set, loop will quit here
+    if(!is.na(scanlim) & my_n == scanlim){
+      break
+    }
 
     #Update counter
     my_n <- my_n + 1
