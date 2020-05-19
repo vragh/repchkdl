@@ -17,15 +17,17 @@
 #' @param inpwait (double) time in seconds (default 2 seconds) after which repchkdl should poll the URL again
 #' @param enabledl (y/n) if set to "n" (default "y") repchkdl will SIMULATE downloads (i.e., nothing will be downloaded even if the terminal prints "Downloading file: ")
 #' @param scanlim (integer; optional) sets the number of times repchkdl should run before exiting
+#' @param firstrundl (y/n) if set to "y" (default) repchkdl will automatically download all matching/available files upon first invocation. Setting to "n" will prompt the user. The user can select to skip downloading the files upon first run; this is useful, for example, if the current set of files at the URL have been downloaded already, and repchkdl is only needed to check for additions hereafter.
 #'
 #' @return a vector containing the names of all files that have been downloaded
 #'
 #' @export
 #'
 #' @examples \dontrun{test <- repchkdl(inpurl = "ftp://speedtest.tele2.net/upload/",
-#' inpregex = ".txt", autoscan = "n", autodl = "n")}
+#' inpregex = ".txt", autoscan = "y", autodl = "n",
+#' enabledl = "n", scanlim = 4, inpwait = 4)}
 
-repchkdl <- function(inpurl = NA, inpwd = getwd(), inpregex = NA, autoscan = "y", autodl = "y", inpwait = 2, enabledl = "y", scanlim = NA){
+repchkdl <- function(inpurl = NA, inpwd = getwd(), inpregex = NA, autoscan = "y", autodl = "y", inpwait = 2, enabledl = "y", scanlim = NA, firstrundl = "y"){
 
   #FUNCTION BEGIN ----------------------------------------------------------------
 
@@ -89,7 +91,12 @@ repchkdl <- function(inpurl = NA, inpwd = getwd(), inpregex = NA, autoscan = "y"
   #offer to download all available files
   if(my_n == 0){
 
-    if(readline("This appears to be the first time this script is being launch. Should all requested files be downloaded (y/n): ") == "y"){
+
+    if(firstrundl == "n"){
+      firstrundl <- readline("This appears to be the first time this script is being launch. Should all requested files be downloaded (y/n): ")
+    }
+
+    if(firstrundl == "y"){
 
       if(length(curlinks) == 0){
         cat("No files available for download! repchkdl will continue scanning.\n")
@@ -297,7 +304,7 @@ repchkdl <- function(inpurl = NA, inpwd = getwd(), inpregex = NA, autoscan = "y"
 
 
   #Prints files downloaded to terminal
-  cat(all_dlfiles, sep = "\n")
+  cat("Finished. Exiting! Here is the list of files downloaded so far: ", all_dlfiles, sep = "\n")
 
   #Returning the list of files downloaded
   return(all_dlfiles)

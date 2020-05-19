@@ -12,7 +12,8 @@ repchkdl(
   autodl = "y",
   inpwait = 2,
   enabledl = "y",
-  scanlim = NA
+  scanlim = NA,
+  firstrundl = "y"
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ repchkdl(
 \item{enabledl}{(y/n) if set to "n" (default "y") repchkdl will SIMULATE downloads (i.e., nothing will be downloaded even if the terminal prints "Downloading file: ")}
 
 \item{scanlim}{(integer; optional) sets the number of times repchkdl should run before exiting}
+
+\item{firstrundl}{(y/n) if set to "y" (default) repchkdl will automatically download all matching/available files upon first invocation. Setting to "n" will prompt the user. The user can select to skip downloading the files upon first run; this is useful, for example, if the current set of files at the URL have been downloaded already, and repchkdl is only needed to check for additions hereafter.}
 }
 \value{
 a vector containing the names of all files that have been downloaded
@@ -47,5 +50,6 @@ otherwise. This CAN cause the latest set of files to not be downloaded!
 }
 \examples{
 \dontrun{test <- repchkdl(inpurl = "ftp://speedtest.tele2.net/upload/",
-inpregex = ".txt", autoscan = "n", autodl = "n")}
+inpregex = ".txt", autoscan = "y", autodl = "n",
+enabledl = "n", scanlim = 4, inpwait = 4)}
 }
