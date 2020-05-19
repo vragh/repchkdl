@@ -24,8 +24,8 @@
 #' @export
 #'
 #' @examples \dontrun{test <- repchkdl(inpurl = "ftp://speedtest.tele2.net/upload/",
-#' inpregex = ".txt", autoscan = "y", autodl = "n",
-#' enabledl = "n", scanlim = 4, inpwait = 4)}
+#' inpregex = ".txt", autoscan = "y", autodl = "y",
+#' enabledl = "n", scanlim = 4, inpwait = 2)}
 
 repchkdl <- function(inpurl = NA, inpwd = getwd(), inpregex = NA, autoscan = "y", autodl = "y", inpwait = 2, enabledl = "y", scanlim = NA, firstrundl = "y"){
 
