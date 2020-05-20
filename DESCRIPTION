@@ -3,7 +3,7 @@ Type: Package
 Title: Continually Check for and Download Newly Added Files from a URL
 Version: 0.1.0
 Author: Venket Raghavan
-Maintainer: Venket Raghavan <venketraghavan@protonmail.com>
+Maintainer: Venket Raghavan <vragh@protonmail.com>
 Description: Given a URL hosting a collection of files, repchkdl will repeatedly
   check if new files have been added to the URL (since the first time it checks the URL).
   If new files are available, repchkdl indicates the files and offers to download them.

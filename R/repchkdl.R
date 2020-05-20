@@ -42,7 +42,12 @@ repchkdl <- function(inpurl = NA, inpwd = getwd(), inpregex = NA, autoscan = "y"
 
   #Copying stuff over to local variables
   myurl <- inpurl
-  mywd <- inpwd
+  #Remove trailing / if there is one
+  if(stringr::str_detect(inpwd, "\\/$")){
+    mywd <- stringr::str_replace(inpwd, "\\/$", "")
+  } else{
+    mywd <- inpwd
+  }
   myregex <- inpregex
 
 
@@ -101,6 +106,7 @@ repchkdl <- function(inpurl = NA, inpwd = getwd(), inpregex = NA, autoscan = "y"
       if(length(curlinks) == 0){
         cat("No files available for download! repchkdl will continue scanning.\n")
       } else{
+
         if(is.na(myregex)){
 
           for(j in 1:length(curlinks)){
@@ -119,7 +125,7 @@ repchkdl <- function(inpurl = NA, inpwd = getwd(), inpregex = NA, autoscan = "y"
 
           }
 
-        } else{
+        } else if (length(curlinks[stringr::str_detect(curlinks, myregex)]) > 0){
 
           for(j in 1:length(curlinks[stringr::str_detect(curlinks, myregex)])){
 
@@ -138,6 +144,9 @@ repchkdl <- function(inpurl = NA, inpwd = getwd(), inpregex = NA, autoscan = "y"
             all_dlfiles <- c(all_dlfiles, dl_file)
 
           }
+
+        } else{
+          cat("No files matching the regex available for download at the time of checking! repchkdl will continue scanning.\n")
         }
 
       }
@@ -244,7 +253,7 @@ repchkdl <- function(inpurl = NA, inpwd = getwd(), inpregex = NA, autoscan = "y"
             cat(paste0("Downloading: ", dl_file, "\n"))
 
             if(enabledl == "y"){
-              utils::download.file(url = paste0(baseurl, dl_file), destfile = paste0(mywd, "/", dl_file))
+              utils::download.file(url = paste0(baseurl, dl_file), destfile = paste0(mywd, '/', dl_file))
             }
 
             cat("Done!\n")
