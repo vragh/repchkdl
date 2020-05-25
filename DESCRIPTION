@@ -1,18 +1,16 @@
 Package: repchkdl
 Type: Package
-Title: Continually Check for and Download Newly Added Files from a URL
-Version: 0.1.0
+Title: Automatically Download Newly Added Files from a FTP URL
+Version: 2.0.0
 Author: Venket Raghavan
-Maintainer: Venket Raghavan <vragh@protonmail.com>
-Description: Given a URL hosting a collection of files, repchkdl will repeatedly
-  check if new files have been added to the URL (since the first time it checks the URL).
-  If new files are available, repchkdl indicates the files and offers to download them.
-  An optional regular expression pattern can be specified to constrain what files repchkdl
-  should consider as valid new additions (based on the file name(s)).
-  repchkdl saves the downloaded files to the default working directory unless an alternative
-  path is specified.
+Maintainer: Venket Raghavan <vragh@tutanota.com>
+Description: Given a FTP URL hosting a collection of files, repchkdl will repeatedly
+  check if new files have been added to the URL (since the first time it checks the URL). 
+  If new files are available, repchkdl will indicate the files and offer to download them 
+  to a directory of choice. Options to fine tune the checking and downloading procedures 
+  are available.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: RCurl, stringr, XML, utils
+Imports: data.table, RCurl, stats, stringr
 RoxygenNote: 7.1.0

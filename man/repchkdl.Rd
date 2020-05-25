@@ -2,54 +2,151 @@
 % Please edit documentation in R/repchkdl.R
 \name{repchkdl}
 \alias{repchkdl}
-\title{Continually Check for and Download Newly Added Files from Given URL Matching Optional Regex}
+\title{Automatically Download Newly Added Files from a FTP URL}
 \usage{
 repchkdl(
-  inpurl = NA,
-  inpwd = getwd(),
-  inpregex = NA,
-  autoscan = "y",
-  autodl = "y",
-  inpwait = 2,
-  enabledl = "y",
-  scanlim = NA,
-  firstrundl = "y"
+  url = NULL,
+  outdir = getwd(),
+  regex = NULL,
+  usr = NULL,
+  pwd = NULL,
+  sizelb = NULL,
+  sizeub = NULL,
+  overwrite = FALSE,
+  dlretry = FALSE,
+  redllim = 1L,
+  firstrundl = NULL,
+  autodl = FALSE,
+  enabledl = FALSE,
+  scanlim = NULL,
+  autoscan = TRUE,
+  wait = 4,
+  verbosity = TRUE
 )
 }
 \arguments{
-\item{inpurl}{(character) URL that should be scanned}
+\item{url}{(character) FTP URL that should be scanned.}
 
-\item{inpwd}{(character; optional) directory where downloaded files should be saved (default location supplied by getwd())}
+\item{outdir}{(character; optional) directory where downloaded files should be
+saved. (Default: location obtained from getwd())}
 
-\item{inpregex}{(character; optional) regular expression (default NA) to indicate what file additions at the URL should be considered for download}
+\item{regex}{(character; optional) regular expression to indicate what file
+additions at the URL should be considered for download. The regex format
+follows stringr conventions.}
 
-\item{autoscan}{(y/n) set to "y" (default) to have repchkdl rescan automatically}
+\item{usr}{(character; optional) username used to access the FTP URL.}
 
-\item{autodl}{(y/n) set to "y" (default) to have repchkdl download new files automatically}
+\item{pwd}{(character; optional) password for the FTP URL.}
 
-\item{inpwait}{(double) time in seconds (default 2 seconds) after which repchkdl should poll the URL again}
+\item{sizelb}{(numeric; optional) minimum file size (in bytes). Only files
+equal to or above this threshold will be downloaded.}
 
-\item{enabledl}{(y/n) if set to "n" (default "y") repchkdl will SIMULATE downloads (i.e., nothing will be downloaded even if the terminal prints "Downloading file: ")}
+\item{sizeub}{(numeric; optional) maximum file size (in bytes). Files equal to
+or above this threshold will NOT be downloaded.}
 
-\item{scanlim}{(integer; optional) sets the number of times repchkdl should run before exiting}
+\item{overwrite}{(logical; optional) controls whether the local copy of a file
+to be downloaded should be overwritten or not. TRUE - local copy will be
+overwritten; FALSE - local copy will not be overwritten, the downloaded file
+will be saved with the prefix "new_" instead. (Default: FALSE)}
 
-\item{firstrundl}{(y/n) if set to "y" (default) repchkdl will automatically download all matching/available files upon first invocation. Setting to "n" will prompt the user. The user can select to skip downloading the files upon first run; this is useful, for example, if the current set of files at the URL have been downloaded already, and repchkdl is only needed to check for additions hereafter.}
+\item{dlretry}{(logical; optional) controls whether a file download should be
+retried if it fails. Set to TRUE to enable retries. This parameter is
+usually used in conjunction with the parameter redllim. (Default: FALSE)}
+
+\item{redllim}{(numeric; optional) controls how many attempts should be made
+to redownload a file upon download failure. This parameter is to be used in
+conjunction with the parameter dlretry. If dlretry is set to FALSE, setting
+redllim will have no effect. (Default: 1L)}
+
+\item{firstrundl}{(logical, NULL; optional) controls whether repchkdl should
+automatically download all matching/available files upon first invocation.
+TRUE - first run files will be downloaded; FALSE - first run files will be
+skipped; NULL - user will be prompted for a decision. This is useful, for
+example, if the current set of files at the URL are available locally, and
+repchkdl is only needed to check for new additions. (Default: NULL)}
+
+\item{autodl}{(logical; optional) controls whether repchkdl should download
+files automatically or if the user should be prompted. Set to TRUE to bypass
+user prompt. (Default: FALSE)}
+
+\item{enabledl}{(logical; optional) controls whether the files should actually
+be downloaded or only simulated (i.e., names of files will printed to
+terminal as having been downloaded). Set to TRUE to enable. (Default: FALSE)}
+
+\item{scanlim}{(numeric; mandatory) sets the maximum number of times repchkdl
+should execute before exiting. It is strongly recommnended to set a finite
+numerical value (e.g., 10) for this parameter! If unset, repchkdl will run
+indefinitely, and will have to be exited forcibly (e.g., Ctrl + C)!
+(Default: NULL)}
+
+\item{autoscan}{(logical; optional) controls whether successive scanning
+iterations should be performed automatically or upon user prompt. Set to
+FALSE to approve successive scan iterations manually. (Default: TRUE)}
+
+\item{wait}{(numeric; optional) URL polling interval in seconds. Provide a
+smaller number to scan the URL more frequently and vice versa. (Default: 4)}
+
+\item{verbosity}{(logical) controls whether console messages should be
+displayed (e.g., messages such as "Downloading file: "). Set to FALSE to
+enable silent mode. (Default: TRUE)}
 }
 \value{
-a vector containing the names of all files that have been downloaded
+a data.frame containing the names of the files, their sizes (in
+ bytes), and a column indicating download success/failure.
 }
 \description{
-This function downloads data from the given URL and keeps checking for new
-files at the URL thereafter. Should new files become available, the function
-offers to download them. A regular expression can be supplied to the function
-to indicate what should be considered valid "new" files; e.g, "txt" would
-check and alert the user/download the files if and only if a file matching
-the regex "txt" becomes available at the URL. Note: repchkdl will have to be
-forcibly exited if autoscan = "y" is set, as there is no way to break the recursion
-otherwise. This CAN cause the latest set of files to not be downloaded!
+Given a FTP URL hosting a collection of files, repchkdl will repeatedly check
+if new files have been added to the URL (since the first time it checks the
+URL). repchkdl accepts optional login credentials (username and password) if
+necessary. If new files are available, repchkdl will indicate the files and
+offer to download them to a directory of choice. What constitutes new files
+can be constrained on the basis of regular expressions and file sizes (lower
+as well as upper bounds) supplied to the function as optional parameters. The
+URL polling frequency, the total number of scan repetitions, re-download
+attempts (upon failure), and whether files should actually be downloaded (or
+if repchkdl should simulate the downloads) are other available options. Silent
+mode operation is also possible.
+}
+\details{
+repchkdl makes use of two functions internally: ftpreadlinks and ftpdl. The
+former fetches the names of files at a URL, and the latter downloads the
+files. ftpdl is basically a wrapper around Rcurl::getBinaryURL(). These
+functions are also exported and can be called by the user.
+
+Notes:
+
+Granular control over which files should be downloaded is not available
+at this time (i.e., if a more than one new file is available at the URL at the
+time of checking, all available files files will be downloaded together).
+
+ftp://, https://, and http:// prefixed URLs are valid.
+
+At present files are downloaded using Curl (via RCurl).
+
+As of v.0.2.0, repchkdl cannot distinguish between directories/folders and
+files (its use of RCurl::getBinaryURL() precludes this). If directories are
+present alongside files, repchkdl will attempt to download them (and fail),
+and this will result in that particular download's entry being recorded as a
+"FAILURE" in the final output data.frame.
 }
 \examples{
-\dontrun{test <- repchkdl(inpurl = "ftp://speedtest.tele2.net/upload/",
-inpregex = ".txt", autoscan = "y", autodl = "y",
-enabledl = "n", scanlim = 4, inpwait = 2)}
+\dontrun{
+#Working example w/ username+password - change the regex to look for other files;
+#run with scanlim = 1 and no regex to get a list of all files
+#This URL is a test FTP server, and contains random files!
+#This test server's password changes frequently
+#Check the password at dlptest.com (and update) before proceeding!
+#(Hence enabledl = FALSE; but the files should be safe to download in theory)
+test <- repchkdl(url = "ftp://ftp.dlptest.com", usr = "dlpuser@dlptest.com",
+                 pwd = "SzMf7rTE4pCrf9dV286GuNe4N", regex = ".*.txt",
+                 enabledl = FALSE, verbosity = TRUE, scanlim = 1)
+}
+\dontrun{
+#This one will result in a "FAILURE" being written to dlstats
+#since it will try to download a directory
+#This also illustrated the user of the dlretry and redllim parameters
+test <- repchkdl(url ="ftp://cran.r-project.org/pub/R/", scanlim = 1,
+                 enabledl = T, regex = "^html$", dlretry = T, redllim = 2)
+}
+
 }
