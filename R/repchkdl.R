@@ -33,6 +33,8 @@
 #' and this will result in that particular download's entry being recorded as a
 #'"FAILURE" in the final output data.frame.
 #'
+#' @author Venket Raghavan
+#'
 #' @param url (character) FTP URL that should be scanned.
 #' @param outdir (character; optional) directory where downloaded files should be
 #'  saved. (Default: location obtained from getwd())
