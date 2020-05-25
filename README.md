@@ -31,4 +31,9 @@ test <- repchkdl(inpurl = "ftp://speedtest.tele2.net/upload/",
 * As of v.0.2.0, `repchkdl` cannot distinguish between directories/folders and files (its use of `RCurl::getBinaryURL()` precludes this). If directories are present alongside files, repchkdl will attempt to download them (and fail), and this will result in that particular download's entry being recorded as a `FAILURE` in the final output `data.frame`.
 
 
+### To do's:
+* Implement proper handling for IP addresses.
+* Test on more FTP sites.
+
+
 ### Feedback and criticism welcome!
