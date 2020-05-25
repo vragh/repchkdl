@@ -27,8 +27,8 @@ test <- repchkdl(inpurl = "ftp://speedtest.tele2.net/upload/",
 ````
 *  Granular control over which files should be downloaded is not available at this time (i.e., if a more than one new file is available at the URL at the time of checking, all available files files will be downloaded together).
 * ftp://, https://, and http:// prefixed URLs are valid.
-* At present files are downloaded using Curl (via RCurl).
-* As of v.0.2.0, repchkdl cannot distinguish between directories/folders and files (its use of RCurl::getBinaryURL() precludes this). If directories are present alongside files, repchkdl will attempt to download them (and fail), and this will result in that particular download's entry being recorded as a "FAILURE" in the final output data.frame.
+* At present files are downloaded using `Curl` (via `RCurl`).
+* As of v.0.2.0, `repchkdl` cannot distinguish between directories/folders and files (its use of `RCurl::getBinaryURL()` precludes this). If directories are present alongside files, repchkdl will attempt to download them (and fail), and this will result in that particular download's entry being recorded as a `FAILURE` in the final output `data.frame`.
 
 
 ### Feedback and criticism welcome!
