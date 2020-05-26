@@ -2,13 +2,17 @@ Package: repchkdl
 Type: Package
 Title: Automatically Download Newly Added Files from a FTP URL
 Version: 2.0.0
-Author: Venket Raghavan
-Maintainer: Venket Raghavan <vragh@tutanota.com>
-Description: Given a FTP URL hosting a collection of files, repchkdl will repeatedly
-  check if new files have been added to the URL (since the first time it checks the URL). 
-  If new files are available, repchkdl will indicate the files and offer to download them 
-  to a directory of choice. Options to fine tune the checking and downloading procedures 
-  are available.
+Authors@R: person("Venket", "Raghavan", email = "vraghvragh@mailfence.com", 
+                   role = c("aut", "cre"))
+Description: Given a FTP URL hosting a collection of files, 
+  repchkdl will repeatedly check if new files have been added 
+  to the URL, after (optionally) checking and downloading upon 
+  initialization. If new files are available, repchkdl will 
+  indicate the files and offer to download them to a directory 
+  of choice. Options to automate as well as fine tune the 
+  checking and downloading procedures are available.
+BugReports: https://github.com/vragh/repchkdl/issues
+URL: https://github.com/vragh/repchkdl
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
