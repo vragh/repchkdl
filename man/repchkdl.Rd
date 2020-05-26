@@ -150,3 +150,6 @@ test <- repchkdl(url ="ftp://cran.r-project.org/pub/R/", scanlim = 1,
 }
 
 }
+\author{
+Venket Raghavan
+}

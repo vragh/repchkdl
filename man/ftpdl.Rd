@@ -72,3 +72,6 @@ test$dlstats[1] <- ftpdl(burl = "ftp://ftp.dlptest.com",
 }
 
 }
+\author{
+Venket Raghavan
+}

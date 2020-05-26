@@ -3,7 +3,7 @@
 #' Downloads the file matching the given file name from the given FTP URL. Used
 #' internally by repchkdl.
 #'
-#' @author Venket Raghavan ()
+#' @author Venket Raghavan
 #'
 #' @param burl (character) FTP URL that should be scanned.
 #' @param dlfile (character) name of the file to be downloaded.
