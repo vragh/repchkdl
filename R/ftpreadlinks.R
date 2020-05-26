@@ -4,8 +4,6 @@
 #' bytes. The set of files returned can be filtered by file size and regular
 #' expressions. Used internally by repchkdl.
 #'
-#' @author Venket Raghavan
-#'
 #' @param rurl (character) FTP URL that should be scanned.
 #' @param rusr (character; optional) username used to access the FTP URL.
 #' @param rpwd (character; optional) password for the FTP URL.
