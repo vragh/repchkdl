@@ -60,6 +60,3 @@ test <- ftpreadlinks(rurl = "ftp://ftp.dlptest.com",
 }
 
 }
-\author{
-Venket Raghavan
-}
