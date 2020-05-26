@@ -13,7 +13,7 @@ Description: Given a FTP URL hosting a collection of files,
   checking and downloading procedures are available.
 BugReports: https://github.com/vragh/repchkdl/issues
 URL: https://github.com/vragh/repchkdl
-License: GPL-3
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: data.table, RCurl, stats, stringr
